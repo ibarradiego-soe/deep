@@ -560,6 +560,94 @@
   }
   .fade-in.visible { opacity: 1; transform: translateY(0); }
 
+  /* CONVERSATIONS */
+  .convos-section { border-top: 1px solid var(--border); }
+
+  .convos-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 60px;
+  }
+
+  .convo-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+
+  .convo-card:hover { border-color: var(--border2); }
+
+  .convo-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 20px 24px 16px;
+    border-bottom: 1px solid rgba(30,30,46,0.7);
+  }
+
+  .convo-avatar {
+    width: 36px; height: 36px;
+    background: rgba(155,159,255,0.08);
+    border: 1px solid rgba(155,159,255,0.12);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .convo-name {
+    font-size: 14px; font-weight: 500;
+    color: var(--text); letter-spacing: -0.2px;
+  }
+
+  .convo-topic {
+    font-size: 11.5px; color: var(--muted);
+    font-weight: 300; margin-top: 2px;
+  }
+
+  .convo-body {
+    padding: 20px 24px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .convo-bubble {
+    font-size: 13.5px;
+    line-height: 1.65;
+    font-weight: 300;
+    padding: 11px 14px;
+    border-radius: 14px;
+    max-width: 88%;
+  }
+
+  .convo-bubble.user {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.06);
+    color: rgba(240,240,245,0.85);
+    align-self: flex-start;
+  }
+
+  .convo-bubble.user.align-right {
+    align-self: flex-end;
+    text-align: right;
+  }
+
+  .convo-bubble.deep {
+    background: rgba(123,127,224,0.08);
+    border: 1px solid rgba(123,127,224,0.15);
+    color: rgba(240,240,245,0.8);
+    align-self: flex-start;
+  }
+
+  .convo-highlight {
+    color: var(--accent);
+    font-weight: 500;
+  }
+
   /* ADVISORY BOARD */
   .advisory-section {
     border-top: 1px solid var(--border);
@@ -846,6 +934,89 @@
       <h3>Get real-time insights</h3>
       <p>Ask Deep about difficult decisions and receive insights grounded in your psychological profile and historical patterns — not generic advice.</p>
     </div>
+  </div>
+</section>
+
+<!-- CONVERSATIONS IN ACTION -->
+<section class="convos-section fade-in">
+  <div class="section-label">Deep in action</div>
+  <h2>Real decisions.<br><em>Real patterns.</em></h2>
+  <p class="section-body">This is what it looks like when Deep surfaces the psychology behind a founder's decision in real time.</p>
+
+  <div class="convos-grid">
+
+    <div class="convo-card">
+      <div class="convo-header">
+        <div class="convo-avatar">👤</div>
+        <div>
+          <div class="convo-name">Derek & Deep</div>
+          <div class="convo-topic">Delegating: why he holds on too tight</div>
+        </div>
+      </div>
+      <div class="convo-body">
+        <div class="convo-bubble user">I know I need to delegate more, but every time I try, it doesn't get done the way I'd do it.</div>
+        <div class="convo-bubble deep">
+          <span class="convo-highlight">Here's the pattern:</span> Your perfectionism score is 82/100, and your control need spikes when stakes feel high. You're not protecting quality — you're protecting control.
+        </div>
+        <div class="convo-bubble user align-right">That feels… accurate.</div>
+        <div class="convo-bubble deep">Let's map what "done right" actually means vs. what's ego. Then build a delegation framework that <span class="convo-highlight">matches your real risk tolerance</span>, not your anxiety.</div>
+      </div>
+    </div>
+
+    <div class="convo-card">
+      <div class="convo-header">
+        <div class="convo-avatar">👤</div>
+        <div>
+          <div class="convo-name">Mary & Deep</div>
+          <div class="convo-topic">Balancing investors vs. team needs</div>
+        </div>
+      </div>
+      <div class="convo-body">
+        <div class="convo-bubble user">Board wants aggressive growth. Team is burned out. I'm stuck in the middle and everyone's frustrated with me.</div>
+        <div class="convo-bubble deep">
+          <span class="convo-highlight">Your conflict-avoidance dimension is showing.</span> You're trying to make everyone happy instead of making a decision. That's why both sides feel unheard.
+        </div>
+        <div class="convo-bubble user align-right">So what do I do?</div>
+        <div class="convo-bubble deep">Stop mediating. Decide what's right based on data, not approval. I'll help you separate <span class="convo-highlight">pressure from principle</span> — then communicate clearly to both sides.</div>
+      </div>
+    </div>
+
+    <div class="convo-card">
+      <div class="convo-header">
+        <div class="convo-avatar">👤</div>
+        <div>
+          <div class="convo-name">Alex & Deep</div>
+          <div class="convo-topic">Senior hire: culture fit vs. speed</div>
+        </div>
+      </div>
+      <div class="convo-body">
+        <div class="convo-bubble user">We need a VP of Engineering yesterday. Found someone great technically, but they feel… off culturally. Do I compromise?</div>
+        <div class="convo-bubble deep">
+          <span class="convo-highlight">Urgency bias alert.</span> Your decision speed jumps 40% under time pressure. That's useful for tactical calls — dangerous for strategic hires that shape the next 3 years.
+        </div>
+        <div class="convo-bubble user align-right">Fair. But we're bleeding.</div>
+        <div class="convo-bubble deep">Then let's separate the urgency from the hire. What <span class="convo-highlight">interim moves</span> buy you time to find the right long-term fit? Acting fast doesn't mean acting wrong.</div>
+      </div>
+    </div>
+
+    <div class="convo-card">
+      <div class="convo-header">
+        <div class="convo-avatar">👤</div>
+        <div>
+          <div class="convo-name">Priya & Deep</div>
+          <div class="convo-topic">When to pivot vs. when to persist</div>
+        </div>
+      </div>
+      <div class="convo-body">
+        <div class="convo-bubble user">Growth is slow. Part of me thinks we should pivot. Part of me thinks we just need more time. How do I know which voice to trust?</div>
+        <div class="convo-bubble deep">
+          <span class="convo-highlight">Your pattern recognition is high, but your loss aversion is higher.</span> You see the signal — pivot makes sense — but sunk cost bias is louder. 18 months of work feels too expensive to abandon.
+        </div>
+        <div class="convo-bubble user align-right">Exactly. What if I'm wrong?</div>
+        <div class="convo-bubble deep">Let's model both paths with real numbers. Then ask: <span class="convo-highlight">what would you tell a founder friend in this exact position?</span> Remove your ego from the equation.</div>
+      </div>
+    </div>
+
   </div>
 </section>
 
