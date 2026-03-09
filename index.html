@@ -784,6 +784,145 @@
     font-style: italic;
     opacity: 0.7;
   }
+
+  /* =====================
+     MOBILE RESPONSIVE
+     ===================== */
+  @media (max-width: 768px) {
+
+    /* NAV */
+    nav {
+      padding: 16px 20px;
+    }
+    .nav-links li:not(:last-child) { display: none; }
+    .nav-links { gap: 0; }
+
+    /* SECTIONS */
+    section {
+      padding: 80px 20px;
+    }
+
+    /* HERO */
+    .hero {
+      padding-top: 130px;
+      padding-bottom: 60px;
+    }
+    .hero::before { width: 100%; }
+
+    h1 {
+      font-size: 32px;
+      letter-spacing: -1px;
+    }
+
+    .hero-sub {
+      font-size: 15px;
+    }
+
+    /* PHONE MOCKUP */
+    .mockup-wrap { margin-top: 56px; }
+    .phone-shell {
+      width: 260px;
+      height: 520px;
+    }
+
+    /* CREDIBILITY */
+    .cred-statement { font-size: 22px; }
+    .logos-row {
+      gap: 28px;
+      padding: 0 10px;
+    }
+    .logo-item { height: 24px; }
+
+    /* WHY SECTION */
+    .why-grid {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+    .why-stat-num { font-size: 40px; }
+
+    /* HOW CARDS */
+    .how-cards {
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    /* CONVERSATIONS */
+    .convos-grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    /* DASHBOARD */
+    .dashboard-panel { padding: 28px 20px; }
+    .profile-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .profile-card { min-height: 110px; padding: 16px 14px; }
+    .profile-card-value { font-size: 14px; }
+    .profile-card-icon { display: none; }
+
+    /* TEAM */
+    .team-panel {
+      grid-template-columns: 1fr;
+      gap: 28px;
+      padding: 28px 20px;
+    }
+
+    /* ADVISORY */
+    .advisor-grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    /* CLOSING */
+    .closing-section {
+      padding: 80px 20px;
+    }
+    .closing-statement { font-size: 26px; }
+
+    /* H2 global */
+    h2 { font-size: 28px; letter-spacing: -0.6px; }
+
+    /* FOOTER */
+    footer { padding: 32px 20px; }
+  }
+
+  @media (max-width: 480px) {
+
+    nav { padding: 14px 16px; }
+    section { padding: 64px 16px; }
+
+    .hero { padding-top: 110px; }
+    h1 { font-size: 27px; }
+    .hero-sub { font-size: 14px; }
+
+    .phone-shell { width: 230px; height: 460px; }
+    .phone-island { width: 76px; height: 22px; }
+    .phone-title { font-size: 13px; }
+    .phone-subtitle { font-size: 8px; }
+    .phone-prompt { font-size: 11px; }
+    .phone-bubble-user, .phone-bubble-ai { font-size: 9.5px; }
+    .phone-card-text { font-size: 9px; }
+
+    .profile-grid { grid-template-columns: 1fr; }
+    .profile-card-value { font-size: 15px; }
+
+    .logos-row { gap: 20px; }
+    .logo-item { height: 20px; }
+
+    h2 { font-size: 24px; }
+    .section-body { font-size: 14px; }
+
+    .convo-bubble { font-size: 12.5px; }
+    .closing-statement { font-size: 22px; }
+
+    footer {
+      flex-direction: column;
+      gap: 12px;
+      text-align: center;
+    }
+  }
 </style>
 </head>
 <body>
