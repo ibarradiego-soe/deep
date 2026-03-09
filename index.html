@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deep — Decision Companion for Founders</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #08080C;
+    --bg2: #0D0D14;
+    --surface: #111119;
+    --card: #12121A;
+    --border: #1E1E2E;
+    --border2: #252538;
+    --text: #F0F0F5;
+    --muted: #7A7A8C;
+    --muted2: #525265;
+    --accent: #9B9FFF;
+    --accent2: #7B7FE0;
+    --accent-dim: rgba(123,127,224,0.12);
+    --green: #5EC4A0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 20px 48px;
+    display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 1px solid rgba(30,30,46,0.6);
+    backdrop-filter: blur(20px);
+    background: rgba(8,8,12,0.8);
+  }
+
+  .nav-logo {
+    font-family: 'Instrument Serif', serif;
+    font-size: 20px;
+    font-style: italic;
+    color: var(--text);
+    letter-spacing: -0.3px;
+  }
+
+  .nav-links {
+    display: flex; gap: 36px; align-items: center;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 14px; color: var(--muted); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  .nav-cta {
+    background: var(--accent-dim);
+    border: 1px solid rgba(155,159,255,0.2);
+    color: var(--accent) !important;
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    transition: background 0.2s, border-color 0.2s !important;
+  }
+  .nav-cta:hover {
+    background: rgba(123,127,224,0.2) !important;
+    border-color: rgba(155,159,255,0.4) !important;
+    color: var(--accent) !important;
+  }
+
+  /* SECTIONS */
+  section { padding: 120px 48px; max-width: 1100px; margin: 0 auto; }
+
+  /* HERO */
+  .hero {
+    padding-top: 180px;
+    padding-bottom: 100px;
+    text-align: center;
+    position: relative;
+  }
+
+  /* Radial glow behind hero */
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 80px; left: 50%;
+    transform: translateX(-50%);
+    width: 700px; height: 400px;
+    background: radial-gradient(ellipse, rgba(123,127,224,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: var(--accent-dim);
+    border: 1px solid rgba(155,159,255,0.18);
+    border-radius: 20px;
+    padding: 5px 14px;
+    font-size: 12px;
+    color: var(--accent);
+    font-weight: 500;
+    letter-spacing: 0.4px;
+    margin-bottom: 36px;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .label-dot {
+    width: 5px; height: 5px;
+    background: var(--accent);
+    border-radius: 50%;
+    box-shadow: 0 0 6px var(--accent);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+  h1 {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(36px, 5vw, 58px);
+    line-height: 1.15;
+    letter-spacing: -1.5px;
+    color: var(--text);
+    max-width: 780px;
+    margin: 0 auto 28px;
+    animation: fadeUp 0.6s ease 0.1s both;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    font-size: 17px;
+    color: var(--muted);
+    max-width: 520px;
+    margin: 0 auto 44px;
+    line-height: 1.7;
+    font-weight: 300;
+    animation: fadeUp 0.6s ease 0.2s both;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent2);
+    color: white;
+    padding: 13px 28px;
+    border-radius: 26px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    box-shadow: 0 0 30px rgba(123,127,224,0.25);
+    animation: fadeUp 0.6s ease 0.3s both;
+  }
+  .btn-primary:hover {
+    background: #8A8EF0;
+    transform: translateY(-1px);
+    box-shadow: 0 0 40px rgba(123,127,224,0.4);
+  }
+
+  .btn-arrow { font-size: 16px; transition: transform 0.2s; }
+  .btn-primary:hover .btn-arrow { transform: translateX(3px); }
+
+  /* PHONE MOCKUP */
+  .mockup-wrap {
+    margin-top: 80px;
+    display: flex;
+    justify-content: center;
+    animation: fadeUp 0.7s ease 0.5s both;
+  }
+
+  .phone-shell {
+    width: 280px;
+    height: 580px;
+    background: #0B0B0F;
+    border-radius: 40px;
+    border: 1.5px solid #222230;
+    box-shadow:
+      0 0 0 6px #0d0d12,
+      0 0 0 7px #181825,
+      0 40px 80px rgba(0,0,0,0.8),
+      0 0 80px rgba(100,100,200,0.06);
+    overflow: hidden;
+    display: flex; flex-direction: column;
+    position: relative;
+  }
+
+  .phone-island {
+    position: absolute; top: 9px; left: 50%; transform: translateX(-50%);
+    width: 90px; height: 26px; background: #000; border-radius: 14px; z-index: 5;
+  }
+
+  .phone-status {
+    margin-top: 42px; padding: 0 20px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .phone-time { font-size: 11px; font-weight: 600; color: #F4F4F6; }
+
+  .phone-header {
+    text-align: center; padding: 12px 16px 10px;
+    border-bottom: 1px solid rgba(42,47,69,0.4);
+  }
+  .phone-title { font-family: 'Instrument Serif', serif; font-size: 16px; color: #F4F4F6; font-style: italic; }
+  .phone-subtitle { font-size: 9px; color: #8B8D98; margin-top: 2px; letter-spacing: 0.3px; }
+
+  .phone-chat {
+    flex: 1; padding: 16px 14px; display: flex; flex-direction: column; gap: 10px; overflow: hidden;
+  }
+
+  .phone-prompt { font-size: 13px; color: #8B8D98; font-weight: 400; margin-bottom: 4px; }
+
+  .phone-bubble-user {
+    align-self: flex-end; max-width: 200px;
+    background: #16181F; border-radius: 13px 13px 3px 13px;
+    padding: 9px 11px; font-size: 10.5px; color: #F4F4F6; line-height: 16px;
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .phone-bubble-ai {
+    align-self: flex-start; max-width: 220px;
+    background: #111520; border-radius: 13px 13px 13px 3px;
+    padding: 10px 11px; font-size: 10.5px; color: rgba(244,244,246,0.88); line-height: 16px; font-weight: 300;
+  }
+
+  .phone-ai-label {
+    font-size: 8px; color: #A5ACFF; font-weight: 500; letter-spacing: 0.8px;
+    text-transform: uppercase; margin-bottom: 5px;
+    display: flex; align-items: center; gap: 4px;
+  }
+  .phone-dot { width: 4px; height: 4px; background: #A5ACFF; border-radius: 50%; box-shadow: 0 0 4px #A5ACFF; }
+
+  .phone-source { font-size: 8px; color: rgba(165,172,255,0.45); font-style: italic; margin-bottom: 6px; }
+  .phone-conclusion { color: rgba(165,172,255,0.95); font-style: italic; margin-top: 5px; display: block; }
+
+  .phone-card {
+    background: #151826; border: 1px solid #2A2F45; border-radius: 14px; padding: 10px 12px;
+    position: relative; overflow: hidden; max-width: 220px;
+  }
+  .phone-card::before {
+    content:''; position:absolute; top:0; left:0; right:0; height:1px;
+    background: linear-gradient(90deg, transparent, #7B85F0 40%, transparent); opacity:0.7;
+  }
+  .phone-card-label {
+    font-size: 8px; color: #A5ACFF; text-transform: uppercase; letter-spacing: 0.8px;
+    font-weight: 500; margin-bottom: 6px; display: flex; align-items: center; gap: 5px;
+  }
+  .phone-diamond { width:5px; height:5px; background:#7B85F0; border-radius:1px; transform:rotate(45deg); flex-shrink:0; }
+  .phone-card-text { font-size: 10px; color: rgba(244,244,246,0.82); line-height: 15px; font-weight: 300; margin-bottom: 7px; }
+  .phone-card-meta { font-size: 9px; color: #8B8D98; }
+
+  .phone-input {
+    padding: 8px 14px 14px;
+  }
+  .phone-input-bar {
+    height: 38px; background: #14161D; border-radius: 19px;
+    border: 1px solid rgba(42,47,69,0.9);
+    display: flex; align-items: center; padding: 0 8px; gap: 8px;
+  }
+  .phone-mic { width:24px; height:24px; background:rgba(165,172,255,0.08); border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .phone-placeholder { font-size: 10.5px; color: #8B8D98; flex: 1; }
+  .phone-send { width:24px; height:24px; background:linear-gradient(135deg,#7B85F0,#5f67d0); border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+
+  .phone-home { height:22px; display:flex; align-items:center; justify-content:center; }
+  .phone-bar { width:90px; height:4px; background:rgba(255,255,255,0.2); border-radius:2px; }
+
+  /* SECTION TITLES */
+  .section-label {
+    display: inline-block;
+    font-size: 11px; font-weight: 500; letter-spacing: 1.2px;
+    text-transform: uppercase; color: var(--accent);
+    margin-bottom: 20px;
+  }
+
+  h2 {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(28px, 3.5vw, 42px);
+    letter-spacing: -1px;
+    line-height: 1.2;
+    color: var(--text);
+    margin-bottom: 20px;
+  }
+
+  h2 em { font-style: italic; color: var(--accent); }
+
+  .section-body {
+    font-size: 16px; color: var(--muted); line-height: 1.75;
+    font-weight: 300; max-width: 560px;
+  }
+
+  /* WHY SECTION */
+  .why-section { border-top: 1px solid var(--border); }
+
+  .why-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+    margin-top: 60px; align-items: start;
+  }
+
+  .why-stat {
+    padding: 28px 0; border-top: 1px solid var(--border);
+  }
+
+  .why-stat-num {
+    font-family: 'Instrument Serif', serif;
+    font-size: 48px; color: var(--accent); letter-spacing: -2px; line-height: 1;
+    margin-bottom: 10px;
+  }
+
+  .why-stat-num span { color: var(--accent); }
+
+  .why-stat-text { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+  /* HOW IT WORKS */
+  .how-section { border-top: 1px solid var(--border); }
+
+  .how-cards {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 20px; margin-top: 60px;
+  }
+
+  .how-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 32px 28px;
+    position: relative; overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .how-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent2) 50%, transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .how-card:hover { border-color: var(--border2); transform: translateY(-2px); }
+  .how-card:hover::before { opacity: 0.6; }
+
+  .how-num {
+    font-size: 11px; color: var(--muted2); font-weight: 500;
+    letter-spacing: 1px; margin-bottom: 20px;
+  }
+
+  .how-card h3 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 20px; color: var(--text); letter-spacing: -0.3px;
+    margin-bottom: 14px; line-height: 1.3;
+  }
+
+  .how-card p { font-size: 14px; color: var(--muted); line-height: 1.7; font-weight: 300; }
+
+  /* DASHBOARD SECTION */
+  .dashboard-section { border-top: 1px solid var(--border); }
+
+  .dashboard-panel {
+    margin-top: 60px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 48px;
+    position: relative; overflow: hidden;
+  }
+
+  .dashboard-panel::before {
+    content: '';
+    position: absolute; top: -100px; right: -100px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(123,127,224,0.05) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .dashboard-header { margin-bottom: 40px; }
+  .dashboard-title { font-family: 'Instrument Serif', serif; font-size: 26px; color: var(--text); letter-spacing: -0.5px; }
+  .dashboard-sub { font-size: 13px; color: var(--muted); margin-top: 6px; }
+
+  .profile-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+  }
+
+  .profile-card {
+    background: #12121A;
+    border: 1px solid #1E1E2E;
+    border-radius: 16px;
+    padding: 22px 20px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    min-height: 130px;
+    position: relative; overflow: hidden;
+    transition: border-color 0.2s;
+  }
+
+  .profile-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(155,159,255,0.2) 50%, transparent);
+  }
+
+  .profile-card:hover { border-color: #2A2F45; }
+
+  .profile-card-label {
+    font-size: 10px; color: var(--muted2); text-transform: uppercase;
+    letter-spacing: 0.8px; font-weight: 500;
+  }
+
+  .profile-card-value {
+    font-size: 17px; color: var(--text); line-height: 1.4;
+    letter-spacing: -0.3px; font-weight: 400;
+  }
+
+  .profile-card-icon {
+    position: absolute; top: 16px; right: 16px;
+    width: 26px; height: 26px;
+    background: rgba(155,159,255,0.06);
+    border: 1px solid rgba(155,159,255,0.1);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px;
+  }
+
+  /* TEAM SECTION */
+  .team-section { border-top: 1px solid var(--border); }
+
+  .team-panel {
+    margin-top: 60px;
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 24px; padding: 48px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+    align-items: start;
+  }
+
+  .team-left h3 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 22px; color: var(--text); letter-spacing: -0.4px;
+    margin-bottom: 16px; line-height: 1.3;
+  }
+  .team-left p { font-size: 14px; color: var(--muted); line-height: 1.7; font-weight: 300; }
+
+  .team-cards { display: flex; flex-direction: column; gap: 12px; }
+
+  .team-compare-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 16px; padding: 20px 22px;
+    position: relative; overflow: hidden;
+  }
+
+  .team-compare-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(155,159,255,0.15) 50%, transparent);
+  }
+
+  .team-name {
+    font-size: 14px; font-weight: 500; color: var(--text);
+    margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
+  }
+
+  .team-dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot-purple { background: #7B7FE0; box-shadow: 0 0 7px rgba(123,127,224,0.5); }
+  .dot-green  { background: var(--green); box-shadow: 0 0 7px rgba(94,196,160,0.5); }
+
+  .team-rows { display: flex; flex-direction: column; gap: 0; }
+
+  .team-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 8px 0; border-bottom: 1px solid rgba(30,30,46,0.8);
+  }
+  .team-row:last-child { border-bottom: none; }
+  .team-row-label { font-size: 11.5px; color: var(--muted); }
+  .team-row-value { font-size: 12px; color: var(--text); font-weight: 400; }
+
+  .insight-bar {
+    margin-top: 12px;
+    background: #151826; border: 1px solid #2A2F45;
+    border-radius: 14px; padding: 16px 18px;
+    position: relative; overflow: hidden;
+  }
+
+  .insight-bar::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, #7B7FE0 40%, transparent); opacity: 0.6;
+  }
+
+  .insight-trigger-label { font-size: 10px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.7px; font-weight: 500; margin-bottom: 5px; }
+  .insight-trigger-val { font-size: 13px; color: var(--text); font-weight: 500; margin-bottom: 5px; }
+  .insight-trigger-desc { font-size: 12px; color: var(--muted); font-weight: 300; line-height: 1.5; }
+
+  /* CLOSING */
+  .closing-section {
+    border-top: 1px solid var(--border);
+    text-align: center;
+    padding: 140px 48px;
+    position: relative;
+  }
+
+  .closing-section::before {
+    content: '';
+    position: absolute; top: 60px; left: 50%; transform: translateX(-50%);
+    width: 600px; height: 300px;
+    background: radial-gradient(ellipse, rgba(123,127,224,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .closing-statement {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(32px, 4vw, 52px);
+    letter-spacing: -1.5px;
+    line-height: 1.2;
+    color: var(--text);
+    max-width: 700px;
+    margin: 0 auto 24px;
+  }
+
+  .closing-statement em { font-style: italic; color: var(--accent); }
+
+  .closing-sub {
+    font-size: 16px; color: var(--muted);
+    max-width: 420px; margin: 0 auto 48px;
+    font-weight: 300; line-height: 1.7;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 40px 48px;
+    display: flex; justify-content: space-between; align-items: center;
+    max-width: 1100px; margin: 0 auto;
+  }
+
+  .footer-logo { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 18px; color: var(--muted2); }
+  .footer-text { font-size: 12px; color: var(--muted2); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  /* ADVISORY BOARD */
+  .advisory-section {
+    border-top: 1px solid var(--border);
+    padding: 120px 48px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .advisor-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+
+  .advisor-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 36px 30px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .advisor-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(155,159,255,0.2) 50%, transparent);
+  }
+
+  .advisor-card:hover {
+    border-color: var(--border2);
+    transform: translateY(-2px);
+  }
+
+  .advisor-avatar {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: rgba(155,159,255,0.06);
+    border: 1px solid rgba(155,159,255,0.12);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 22px;
+    overflow: hidden;
+  }
+
+  .avatar-inner {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, #1e1e30, #141420);
+    font-size: 14px; font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.5px;
+    border-radius: 50%;
+  }
+
+  .advisor-name {
+    font-size: 16px; font-weight: 500;
+    color: var(--text); margin-bottom: 5px;
+    letter-spacing: -0.2px;
+  }
+
+  .advisor-title {
+    font-size: 12px; color: var(--muted);
+    font-weight: 400; margin-bottom: 18px;
+    letter-spacing: 0.2px;
+  }
+
+  .advisor-desc {
+    font-size: 13.5px; color: var(--muted);
+    line-height: 1.7; font-weight: 300;
+    margin-bottom: 20px;
+  }
+
+  .advisor-tags {
+    display: flex; flex-wrap: wrap; gap: 7px;
+  }
+
+  .advisor-tag {
+    font-size: 11px; color: var(--muted2);
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 3px 10px;
+    font-weight: 400;
+    letter-spacing: 0.2px;
+  }
+
+  .advisor-disclaimer {
+    text-align: center;
+    font-size: 12px;
+    color: var(--muted2);
+    font-weight: 300;
+    font-style: italic;
+    padding-top: 8px;
+  }
+
+  /* DIVIDER LINE */
+  .divider { height: 1px; background: var(--border); max-width: 1100px; margin: 0 auto; }
+
+  /* CREDIBILITY */
+  .cred-label {
+    font-size: 11px; font-weight: 500; letter-spacing: 1.4px;
+    text-transform: uppercase; color: var(--muted2);
+    margin-bottom: 24px;
+  }
+  .cred-statement {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(26px, 3vw, 36px);
+    color: var(--text); letter-spacing: -0.8px; line-height: 1.2;
+    margin-bottom: 16px;
+  }
+  .cred-sub {
+    font-size: 15px; color: var(--muted); max-width: 480px;
+    margin: 0 auto 64px; font-weight: 300; line-height: 1.7;
+  }
+  .logos-row {
+    display: flex; justify-content: center; align-items: center;
+    gap: 56px; flex-wrap: wrap;
+  }
+  .logo-item {
+    height: 32px; width: auto;
+    opacity: 0.45;
+    transition: opacity 0.2s;
+    flex-shrink: 0;
+    filter: brightness(0.9);
+  }
+  .logo-item:hover { opacity: 0.65; }
+  .logos-disclaimer {
+    margin-top: 32px;
+    font-size: 11px;
+    color: var(--muted2);
+    font-weight: 300;
+    font-style: italic;
+    opacity: 0.7;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Deep</div>
+  <ul class="nav-links">
+    <li><a href="#">How it works</a></li>
+    <li><a href="#">For teams</a></li>
+    <li><a href="#" class="nav-cta">Get early access</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="max-width:1100px">
+  <div class="hero-label">
+    <div class="label-dot"></div>
+    Deep for Founders
+  </div>
+
+  <h1>Most founders think they have <em>strategy</em> problems.<br>They usually have <em>self-awareness</em> problems.</h1>
+
+  <p class="hero-sub">Deep helps founders and executives understand the psychology behind their decisions and the dynamics shaping their teams.</p>
+
+  <a href="/concept" class="btn-primary">
+    Concept by Diego I.
+    <span class="btn-arrow">→</span>
+  </a>
+
+  <!-- Phone mockup -->
+  <div class="mockup-wrap">
+    <div class="phone-shell">
+      <div class="phone-island"></div>
+      <div class="phone-status">
+        <span class="phone-time">9:41</span>
+        <svg width="44" height="10" viewBox="0 0 44 10" fill="#F4F4F6">
+          <rect x="0" y="2" width="2.5" height="8" rx="0.8" opacity="0.4"/>
+          <rect x="3.5" y="1" width="2.5" height="9" rx="0.8" opacity="0.6"/>
+          <rect x="7" y="0" width="2.5" height="10" rx="0.8" opacity="0.85"/>
+          <rect x="10.5" y="0" width="2.5" height="10" rx="0.8"/>
+          <rect x="28" y="1" width="15" height="8" rx="2.5" stroke="#F4F4F6" stroke-width="0.8" fill="none" opacity="0.4"/>
+          <rect x="43.2" y="3" width="1.5" height="4" rx="0.8" fill="#F4F4F6" opacity="0.4"/>
+          <rect x="29" y="2" width="11" height="6" rx="1.8"/>
+        </svg>
+      </div>
+      <div class="phone-header">
+        <div class="phone-title">Deep</div>
+        <div class="phone-subtitle">Decision Companion</div>
+      </div>
+      <div class="phone-chat">
+        <div class="phone-prompt">What's on your mind?</div>
+        <div class="phone-bubble-user">"I can't agree with my partner John on whether we should sign this contract."</div>
+        <div class="phone-bubble-ai">
+          <div class="phone-ai-label"><div class="phone-dot"></div> Deep</div>
+          <div class="phone-source">Based on your decision profile</div>
+          John prioritizes momentum. You slow down to avoid irreversible mistakes. This dynamic has appeared before.
+          <span class="phone-conclusion">This may not be about strategy. It may be about decision processing speed.</span>
+        </div>
+        <div class="phone-card">
+          <div class="phone-card-label"><div class="phone-diamond"></div> Pattern detected</div>
+          <div class="phone-card-text">Under high-stakes decisions, you shift into deep analysis and delay commitment.</div>
+          <div class="phone-card-meta">↻ Observed in 3 previous decisions</div>
+        </div>
+      </div>
+      <div class="phone-input">
+        <div class="phone-input-bar">
+          <div class="phone-mic">
+            <svg width="8" height="11" viewBox="0 0 8 11" fill="none">
+              <rect x="2" y="0.5" width="4" height="6" rx="2" fill="#A5ACFF"/>
+              <path d="M0.5 5.5c0 2 1.5 3.5 3.5 3.5s3.5-1.5 3.5-3.5" stroke="#A5ACFF" stroke-width="0.9" stroke-linecap="round" fill="none"/>
+              <line x1="4" y1="9" x2="4" y2="10.5" stroke="#A5ACFF" stroke-width="0.9" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <span class="phone-placeholder">Speak to Deep</span>
+          <div class="phone-send">
+            <svg width="8" height="8" viewBox="0 0 8 8" fill="none">
+              <path d="M4 7V1M4 1L1.5 3.5M4 1L6.5 3.5" stroke="white" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div class="phone-home"><div class="phone-bar"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CREDIBILITY -->
+<section class="credibility-section fade-in" style="max-width:1100px; padding: 80px 48px 100px; text-align:center;">
+  <div class="cred-label">Trusted by high-performing teams</div>
+  <div class="cred-statement">Your competitors are already making better decisions.</div>
+  <div class="cred-sub">The best founders and leadership teams invest in understanding how they think, decide, and lead under pressure.</div>
+  <div class="logos-row">
+  <img class="logo-item" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABCGlDQ1BJQ0MgUHJvZmlsZQAAeJxjYGA8wQAELAYMDLl5JUVB7k4KEZFRCuwPGBiBEAwSk4sLGHADoKpv1yBqL+viUYcLcKakFicD6Q9ArFIEtBxopAiQLZIOYWuA2EkQtg2IXV5SUAJkB4DYRSFBzkB2CpCtkY7ETkJiJxcUgdT3ANk2uTmlyQh3M/Ck5oUGA2kOIJZhKGYIYnBncAL5H6IkfxEDg8VXBgbmCQixpJkMDNtbGRgkbiHEVBYwMPC3MDBsO48QQ4RJQWJRIliIBYiZ0tIYGD4tZ2DgjWRgEL7AwMAVDQsIHG5TALvNnSEfCNMZchhSgSKeDHkMyQx6QJYRgwGDIYMZAKbWPz9HbOBQAAAC30lEQVR4nO2Xv28URxTHP29mZ/eO2ICEaGLzUzGxhME2CBnJLmiSJv9FREeNKFHKKHU6xB9BE0oKcGFLNj5syRCwbAQhUWgiI3l3Z2eGwvbmnNye9xxbVhCv3Lnvm8/M+zHvpL//aOAQTR3m5p8BAKJuiyKCUooACBBCwHvf1aFSChEpNd57QqhOs0oAEcFaS5al29sTRYZGo1HpUETY2NigKGypSZIGxphKTUcApRRZlnH27HkujoxiC4uJDG/evKa1MNfR4Tbw+JVrDA6eLjVLSy3WVlcqIToCiAhZlnLp8jjf37xVfn/y+BGzM9PESUJwbqdGKbIs5Ztvv2Ny6kb5/f69n3m+vESSJLh/aCoB2k/kXIG1BcZEpOkGm1dbqSJN0x0aay0i1ZquVSAiaB2hlELrqKuj0qHqTXPoZbivAEpJrVtqt659YDcTEUSprYKDoiiwuT1YAKUErTQANs/J8wzvPX19/QwNDfPlwGAJdyAARVGwvv4XACdOnGTowjCjY1cZGRnj9Jlz5cZK1YtuTwAiwuCpM0xMTHJ59ApfD1/k2LHj5bpzrmzfda0WgNaKEAIT16eYnLpBHCflmrW2LD2tdf3TbFlN1M3sPnLkC6LIYK0t26oxBq0j/vj9HQ9/ecDLX5cBuj5A7baHJFQopcjzjFcvX9BqzfOsNc/a6ivev/+T23fu8tXQ8K6vZo8AgRACHz6sMz83w8LTOZaXF3n321uyLEXriGaziTExxsQ9HagWgHMerSNmZ6b56ccfymuP45gkSQghICJ479jsCPsM0G7GGPr6j+Kdw3tfvnBqDwkIe2jFznm897Vj/J8AQgg4V2ydtKiV2d7v1OwGWhmCEEIZa603f9ZoNNktxs1mc4fGxHFXcOn0x0REyPN8TyPZ6NhVBgZO/T2SLS6wurpCkiQdb6MjQLvDXofSNE17GkorAbYdHtpYDttJ+O9Bspv1Wh2f1kj2vwT4CNrZYlrNC4xVAAAAAElFTkSuQmCC" alt="Logo 1" style="height:32px;width:auto;object-fit:contain;" />
+  <img class="logo-item" src="data:image/png;base64,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" alt="Logo 2" style="height:32px;width:auto;object-fit:contain;" />
+  <img class="logo-item" src="data:image/png;base64,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" alt="Logo 3" style="height:32px;width:auto;object-fit:contain;" />
+  <img class="logo-item" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABCGlDQ1BJQ0MgUHJvZmlsZQAAeJxjYGA8wQAELAYMDLl5JUVB7k4KEZFRCuwPGBiBEAwSk4sLGHADoKpv1yBqL+viUYcLcKakFicD6Q9ArFIEtBxopAiQLZIOYWuA2EkQtg2IXV5SUAJkB4DYRSFBzkB2CpCtkY7ETkJiJxcUgdT3ANk2uTmlyQh3M/Ck5oUGA2kOIJZhKGYIYnBncAL5H6IkfxEDg8VXBgbmCQixpJkMDNtbGRgkbiHEVBYwMPC3MDBsO48QQ4RJQWJRIliIBYiZ0tIYGD4tZ2DgjWRgEL7AwMAVDQsIHG5TALvNnSEfCNMZchhSgSKeDHkMyQx6QJYRgwGDIYMZAKbWPz9HbOBQAAAByUlEQVR4nO2Wz07bQBDGv9m1tC4NdXiWAnJQlTei9MYzVOKAqnLghHgUBCJUpe+SmD9xgrMfhxgjjL1ep5HCIXPyn92Z385+s7PS6WwSKzS1yuBrgDXAhwAIFp4p4jeO7ipvD5AHnmWZ13AdBE6QdgAisLMZACKKul5TkmQIQKC0roRonQGS+P7jENs7PVhrITVbQRJKKdz+HeDX8c8lZEAEsyxDFHUR9/oIw9BrWtzr4/zsFKPRcL4dJZCFRDidTmCMAUlnBkQE0+nE6asZIA8g+aMoBREpApcB2KB6f4CS2kWAp6cMaTp2llYZzBizGEBZ7aIU0nSMOP6Gjc+d2vTfJSNApPj/7/amdv+dAACxf3CIr9vxazASm1+i9yNJWGtx8vsIN4NLhOEn0FoA8zKs00k1QK72bncLvb0+jHGr/QXu8fEBfwZXeLi/xyQdF4ttOohqewFJpGlarI5ko8BMGCIINLQOoIPgNe2OeQsdRFXvJEFr5/HmH7z8OQGMCd+UXJX5qt0fgITWGkkyxOD6Aju7e95HrkvttQuovBXnTYdcXtNpB5BDAMtru3VWr4HcUeG4yVoGbgb4T8e+tvI74RpgDbBygGd/6+IlPSbx+wAAAABJRU5ErkJggg==" alt="Logo 4" style="height:32px;width:auto;object-fit:contain;" />
+  <img class="logo-item" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABCGlDQ1BJQ0MgUHJvZmlsZQAAeJxjYGA8wQAELAYMDLl5JUVB7k4KEZFRCuwPGBiBEAwSk4sLGHADoKpv1yBqL+viUYcLcKakFicD6Q9ArFIEtBxopAiQLZIOYWuA2EkQtg2IXV5SUAJkB4DYRSFBzkB2CpCtkY7ETkJiJxcUgdT3ANk2uTmlyQh3M/Ck5oUGA2kOIJZhKGYIYnBncAL5H6IkfxEDg8VXBgbmCQixpJkMDNtbGRgkbiHEVBYwMPC3MDBsO48QQ4RJQWJRIliIBYiZ0tIYGD4tZ2DgjWRgEL7AwMAVDQsIHG5TALvNnSEfCNMZchhSgSKeDHkMyQx6QJYRgwGDIYMZAKbWPz9HbOBQAAAD1klEQVR4nL2X2VfbRhSHvxlJtiQW04ABx2EJDsbErE16Tl+gPel/ndM2TfrQ9KQ09KElLA1LSEiBhJTF2JJnpg9CTjlpYstNex81o/l9d5mrKwEY2jAhBEIIjDEY09YRANjtigMsLN4B4MH9bxprSWHaAjDGMD0zz40bEwC8eXPEL8tLDbAkJpNsjgV6e7PMzt2iWq1SrVWZnpnnypU+jDGJIRIBxDY7dwvbdqL8a4NtO8x/+lk7R7UOEBdcLpdnaHiEMAgQUiCkIAwCrg0NMzh4NXENtAwQHzxeLCGldUkoCr1konQzkXgiAADf7yCXu0YYBtHLQjZyXq+H5HJ5fN//+ACxSC6Xx/N9jDakUilqQY0gCEil0xhtcD2fwVw+Oli25ltL1zAOd7Z/IGpAUrC8vMTa6m+AoThRZmp6FiEEAwM5nv6+3nItJEpBJvMJlmWxs73J8uNHnJ9XqFQqLD9+xM72JpZl0d3dcwn6owE4jtPI7/7+H9HLUiKlhRCi8cz3fRwn1bJTiQAcx0ErRTbbD4BSCq0Vxhiy2QGUUo19QEtNqeVWLKWFtCyCMGB0tMDR0WvW11YwBooTk4yOjhGGwUVUWs9sUwApJVrr6GAho+6H4fbtzylNTgHQ0dFBvV5HCBGBJgBoeedYoUjadTE6Kq4gCPBcD9/zCYMQAKMNaddlrFAEWktBUwCtNV1d3ZQmy4Rh0DhUSIHWGqUVQl4ICaiHIaXJMp1d3Wit/x1AHMqb5Rk8z0crDX936h8cVErheT7l8kxT8aYAWmsymR4KhWLkvWweUiEFQVCjUCiSyfS0DxCHemp6jrTrRt4b3jvACSEa60YbXNelPDXbPoAxBiklfX39KKUwGCzbxnbevThCiGgucN6u15Uimx1oeiOapqBeDzFa47keu8+22FhfxbGdCEpHA0ncgNbXnvBsZwvXdcEY6vWwaSG+tw/EA8jp6SnDI9d5svIrD+5/jeOkGB0t0NnZhVYq8sKyqJydsfTTQ8KwzhdfQmmyzPb25gfFPwgQ2/raCqenJ/y89CMA1eo5D3/4nt6+LEophADLsjk8PKBWqwHw3b27HB//yd6L3aYAgoT/BXFkhkeuMz5eAmBjY5XtraeNtSSWaCyPBbq6ullYvEM6lQZgMHeV168OOTk5TiQObU7F+fwQqVSaynmFynmFVCpNPj/UgExibf2YOKnoey+FfOdZUmsrAq8ODy7lWmvF4cH+fw8Qi+7tPef57g6e5+F5HjvbW7x8+aKtIkx8C2LzfZ+Fxa+wbZt7396lUjn7fwEg+loKIVAXDakd+wtPG5luQAFnggAAAABJRU5ErkJggg==" alt="Logo 5" style="height:32px;width:auto;object-fit:contain;" />
+</div>
+<div class="logos-disclaimer">Logos shown for illustrative purposes only. These companies are not clients or affiliates of Deep.</div>
+
+</section>
+
+<!-- WHY DEEP EXISTS -->
+<section class="why-section fade-in">
+  <div class="section-label">Why Deep exists</div>
+  <h2>Most business problems<br>are <em>psychology</em> problems</h2>
+  <p class="section-body">Founders and executives spend years refining strategy — but rarely examine the patterns shaping how they actually make decisions under pressure. The real constraints are rarely external.</p>
+
+  <div class="why-grid">
+    <div>
+      <div class="why-stat">
+        <div class="why-stat-num">7<span>2%</span></div>
+        <div class="why-stat-text">of startup failures trace back to founder psychology, team dynamics, or decision-making patterns — not product or market.</div>
+      </div>
+      <div class="why-stat">
+        <div class="why-stat-num">3<span>×</span></div>
+        <div class="why-stat-text">Leaders with high self-awareness make decisions 3x faster and with significantly fewer costly reversals.</div>
+      </div>
+    </div>
+    <div style="padding-top: 28px;">
+      <p style="font-size: 16px; color: var(--muted); line-height: 1.85; font-weight: 300;">
+        Most tools optimize the outside — dashboards, frameworks, processes. Deep works differently. It maps the inside: your psychological patterns, your decision biases, your blind spots, and how they interact with the people around you.<br><br>
+        The result isn't just better decisions. It's a clearer picture of who you are as a leader.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section fade-in">
+  <div class="section-label">How it works</div>
+  <h2>Three layers of<br><em>decision intelligence</em></h2>
+
+  <div class="how-cards">
+    <div class="how-card">
+      <div class="how-num">01</div>
+      <h3>Build your decision profile</h3>
+      <p>Deep analyzes psychological patterns across multiple frameworks to understand how you process risk, conflict, and uncertainty — and builds a living model of your decision style.</p>
+    </div>
+    <div class="how-card">
+      <div class="how-num">02</div>
+      <h3>Understand your team</h3>
+      <p>Deep compares how partners and executives make decisions under pressure — revealing the dynamics that create friction, delay, or misalignment inside leadership teams.</p>
+    </div>
+    <div class="how-card">
+      <div class="how-num">03</div>
+      <h3>Get real-time insights</h3>
+      <p>Ask Deep about difficult decisions and receive insights grounded in your psychological profile and historical patterns — not generic advice.</p>
+    </div>
+  </div>
+</section>
+
+<!-- DECISION PROFILE DASHBOARD -->
+<section class="dashboard-section fade-in">
+  <div class="section-label">Decision Profile</div>
+  <h2>Your psychology,<br><em>mapped</em></h2>
+
+  <div class="dashboard-panel">
+    <div class="dashboard-header">
+      <div class="dashboard-title">Your Decision Profile</div>
+      <div class="dashboard-sub">Patterns detected across 48 decisions</div>
+    </div>
+    <div class="profile-grid">
+      <div class="profile-card">
+        <div class="profile-card-icon">⚡</div>
+        <div class="profile-card-label">Decision Speed</div>
+        <div class="profile-card-value">Analytical under uncertainty</div>
+      </div>
+      <div class="profile-card">
+        <div class="profile-card-icon">⚖️</div>
+        <div class="profile-card-label">Risk Orientation</div>
+        <div class="profile-card-value">Moderate risk<br>High downside awareness</div>
+      </div>
+      <div class="profile-card">
+        <div class="profile-card-icon">💬</div>
+        <div class="profile-card-label">Conflict Pattern</div>
+        <div class="profile-card-value">Tends to delay difficult conversations</div>
+      </div>
+      <div class="profile-card">
+        <div class="profile-card-icon">🧠</div>
+        <div class="profile-card-label">Stress Response</div>
+        <div class="profile-card-value">Moves into deep analysis mode</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM DECISION DYNAMICS -->
+<section class="team-section fade-in">
+  <div class="section-label">Team Dynamics</div>
+  <h2>Deep understands<br><em>relationships</em>, not just people</h2>
+
+  <div class="team-panel">
+    <div class="team-left">
+      <h3>Leadership Decision Dynamic</h3>
+      <p>Most co-founder conflicts aren't about strategy — they're about different ways of processing decisions under pressure. Deep maps the interaction between two decision-making styles and surfaces the patterns driving friction before they become irreversible.</p>
+    </div>
+    <div>
+      <div class="team-cards">
+        <div class="team-compare-card">
+          <div class="team-name"><div class="team-dot dot-purple"></div> John</div>
+          <div class="team-rows">
+            <div class="team-row"><span class="team-row-label">Decision speed</span><span class="team-row-value">Fast</span></div>
+            <div class="team-row"><span class="team-row-label">Risk tolerance</span><span class="team-row-value">High</span></div>
+            <div class="team-row"><span class="team-row-label">Stress response</span><span class="team-row-value">Pushes for momentum</span></div>
+          </div>
+        </div>
+        <div class="team-compare-card">
+          <div class="team-name"><div class="team-dot dot-green"></div> You</div>
+          <div class="team-rows">
+            <div class="team-row"><span class="team-row-label">Decision speed</span><span class="team-row-value">Analytical</span></div>
+            <div class="team-row"><span class="team-row-label">Risk tolerance</span><span class="team-row-value">Moderate</span></div>
+            <div class="team-row"><span class="team-row-label">Stress response</span><span class="team-row-value">Slows down to reduce downside</span></div>
+          </div>
+        </div>
+        <div class="insight-bar">
+          <div class="insight-trigger-label">Likely conflict trigger</div>
+          <div class="insight-trigger-val">Decision timing under uncertainty</div>
+          <div class="insight-trigger-desc">This disagreement may be caused by a difference in decision speed.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ADVISORY BOARD -->
+<section class="advisory-section fade-in">
+  <div style="text-align:center; margin-bottom: 60px;">
+    <div class="section-label">Scientific Foundations</div>
+    <h2 style="max-width:560px; margin: 0 auto 20px;">Concept Advisory Board</h2>
+    <p class="section-body" style="margin: 0 auto; text-align:center; max-width:580px;">
+      Deep is designed at the intersection of behavioral science, neuroscience, and leadership decision-making. The long-term vision is to collaborate with leading researchers studying how humans think, decide, and operate under pressure.
+    </p>
+  </div>
+
+  <div class="advisor-grid">
+
+    <div class="advisor-card">
+      <div class="advisor-avatar">
+        <div class="avatar-inner">AC</div>
+      </div>
+      <div class="advisor-name">Dr. Adrian Clarke</div>
+      <div class="advisor-title">Behavioral Decision Scientist</div>
+      <p class="advisor-desc">Research focuses on how uncertainty affects executive decision-making, and the cognitive shortcuts leaders use under time pressure and high stakes.</p>
+      <div class="advisor-tags">
+        <span class="advisor-tag">Decision Theory</span>
+        <span class="advisor-tag">Cognitive Bias</span>
+      </div>
+    </div>
+
+    <div class="advisor-card">
+      <div class="advisor-avatar">
+        <div class="avatar-inner" style="background: linear-gradient(135deg, #1a2a35, #0e2030);">ML</div>
+      </div>
+      <div class="advisor-name">Dr. Maya Laurent</div>
+      <div class="advisor-title">Neuropsychologist</div>
+      <p class="advisor-desc">Studies the neurological basis of risk perception and emotional regulation in high-performance leadership contexts and under sustained organizational stress.</p>
+      <div class="advisor-tags">
+        <span class="advisor-tag">Neuroscience</span>
+        <span class="advisor-tag">Risk Perception</span>
+      </div>
+    </div>
+
+    <div class="advisor-card">
+      <div class="advisor-avatar">
+        <div class="avatar-inner" style="background: linear-gradient(135deg, #1a1f2e, #121826);">DR</div>
+      </div>
+      <div class="advisor-name">Dr. Daniel Roth</div>
+      <div class="advisor-title">Behavioral Systems Researcher</div>
+      <p class="advisor-desc">Specializes in how behavioral patterns propagate across leadership teams, and the systemic effects of individual decision styles on organizational outcomes.</p>
+      <div class="advisor-tags">
+        <span class="advisor-tag">Systems Behavior</span>
+        <span class="advisor-tag">Team Dynamics</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="advisor-disclaimer">
+    Advisor profiles shown as illustrative examples of the type of expertise envisioned for Deep.
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="closing-section" style="max-width:1100px">
+  <div class="closing-statement">"Self-awareness is the <em>ultimate</em> competitive advantage."</div>
+  <p class="closing-sub">Deep helps leaders see what they cannot see from inside their own mind.</p>
+  <a href="/concept" class="btn-primary">Concept by Diego I. <span class="btn-arrow">→</span></a>
+</section>
+
+<div class="divider"></div>
+
+<footer>
+  <div class="footer-logo">Deep</div>
+  <div class="footer-text">© 2025 Deep. All rights reserved.</div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

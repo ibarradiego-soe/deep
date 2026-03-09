@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Concept by Diego Ibarra — Deep</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #08080C;
+    --bg2: #0D0D14;
+    --card: #12121A;
+    --border: #1E1E2E;
+    --border2: #252538;
+    --text: #F0F0F5;
+    --muted: #7A7A8C;
+    --muted2: #525265;
+    --accent: #9B9FFF;
+    --accent2: #7B7FE0;
+    --accent-dim: rgba(123,127,224,0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 20px 48px;
+    display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 1px solid rgba(30,30,46,0.5);
+    backdrop-filter: blur(20px);
+    background: rgba(8,8,12,0.85);
+  }
+
+  .nav-logo {
+    font-family: 'Instrument Serif', serif;
+    font-size: 20px; font-style: italic;
+    color: var(--text); text-decoration: none;
+  }
+
+  .nav-back {
+    font-size: 13px; color: var(--muted);
+    text-decoration: none;
+    display: flex; align-items: center; gap: 6px;
+    transition: color 0.2s;
+  }
+  .nav-back:hover { color: var(--text); }
+
+  /* MAIN */
+  main {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 140px 48px 100px;
+  }
+
+  /* PAGE HEADER */
+  .page-header {
+    margin-bottom: 80px;
+    padding-bottom: 60px;
+    border-bottom: 1px solid var(--border);
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .page-eyebrow {
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 1.3px; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 20px;
+    display: flex; align-items: center; gap: 8px;
+  }
+
+  .eyebrow-dot {
+    width: 5px; height: 5px;
+    background: var(--accent); border-radius: 50%;
+    box-shadow: 0 0 6px var(--accent);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+  .page-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(34px, 5vw, 48px);
+    letter-spacing: -1.5px;
+    line-height: 1.15;
+    color: var(--text);
+    margin-bottom: 24px;
+  }
+
+  .page-title em { font-style: italic; color: var(--accent); }
+
+  .page-meta {
+    font-size: 13px; color: var(--muted2);
+    display: flex; gap: 20px; align-items: center;
+  }
+
+  .meta-sep { opacity: 0.3; }
+
+  /* SECTIONS */
+  .memo-section {
+    margin-bottom: 72px;
+    padding-bottom: 72px;
+    border-bottom: 1px solid rgba(30,30,46,0.6);
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .memo-section.visible { opacity: 1; transform: translateY(0); }
+  .memo-section:last-of-type { border-bottom: none; }
+
+  .section-num {
+    font-size: 11px; color: var(--muted2);
+    font-weight: 500; letter-spacing: 1px;
+    margin-bottom: 16px;
+  }
+
+  .memo-section h2 {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(22px, 3vw, 28px);
+    letter-spacing: -0.6px;
+    color: var(--text);
+    margin-bottom: 28px;
+    line-height: 1.25;
+  }
+
+  .memo-section p {
+    font-size: 16px;
+    color: rgba(240,240,245,0.75);
+    line-height: 1.85;
+    font-weight: 300;
+    margin-bottom: 20px;
+  }
+
+  .memo-section p:last-child { margin-bottom: 0; }
+
+  .memo-section p strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  /* Bullet list */
+  .memo-list {
+    list-style: none;
+    margin: 8px 0 20px;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+
+  .memo-list li {
+    font-size: 16px;
+    color: rgba(240,240,245,0.75);
+    line-height: 1.7;
+    font-weight: 300;
+    display: flex; align-items: flex-start; gap: 12px;
+    padding-left: 4px;
+  }
+
+  .memo-list li::before {
+    content: '—';
+    color: var(--accent);
+    font-size: 14px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    opacity: 0.7;
+  }
+
+  /* Highlighted quote / pullout */
+  .memo-pullout {
+    border-left: 2px solid var(--accent2);
+    padding: 4px 0 4px 24px;
+    margin: 28px 0;
+  }
+
+  .memo-pullout p {
+    font-family: 'Instrument Serif', serif;
+    font-size: 20px !important;
+    font-style: italic;
+    color: rgba(240,240,245,0.9) !important;
+    line-height: 1.5 !important;
+  }
+
+  /* Link style */
+  .memo-link {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(155,159,255,0.25);
+    transition: border-color 0.2s, color 0.2s;
+    font-weight: 400;
+  }
+  .memo-link:hover {
+    color: #b8bbff;
+    border-color: rgba(155,159,255,0.6);
+  }
+
+  /* Closing statement */
+  .closing {
+    margin-top: 80px;
+    padding: 60px 0 0;
+    border-top: 1px solid var(--border);
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .closing.visible { opacity: 1; transform: translateY(0); }
+
+  .closing-text {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(24px, 3.5vw, 34px);
+    line-height: 1.4;
+    letter-spacing: -0.8px;
+    color: var(--text);
+    margin-bottom: 32px;
+  }
+
+  .closing-text em { font-style: italic; color: var(--accent); }
+
+  /* Footer */
+  .page-footer {
+    margin-top: 80px;
+    padding-top: 40px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-logo {
+    font-family: 'Instrument Serif', serif;
+    font-size: 17px; font-style: italic;
+    color: var(--muted2); text-decoration: none;
+  }
+
+  .footer-back {
+    font-size: 13px; color: var(--muted2);
+    text-decoration: none;
+    display: flex; align-items: center; gap: 6px;
+    transition: color 0.2s;
+  }
+  .footer-back:hover { color: var(--text); }
+
+  /* Animations */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* CAPABILITY BLOCKS */
+  .capability-blocks {
+    margin-top: 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .capability-block {
+    padding: 24px 0;
+    border-top: 1px solid rgba(30,30,46,0.8);
+  }
+
+  .capability-block:last-child {
+    border-bottom: 1px solid rgba(30,30,46,0.8);
+  }
+
+  .capability-title {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 8px;
+    letter-spacing: -0.2px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .capability-title::before {
+    content: '';
+    width: 5px; height: 5px;
+    background: var(--accent2);
+    border-radius: 50%;
+    flex-shrink: 0;
+    opacity: 0.7;
+  }
+
+  .capability-block p {
+    font-size: 14.5px !important;
+    color: var(--muted) !important;
+    line-height: 1.75 !important;
+    margin-bottom: 0 !important;
+    padding-left: 15px;
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    main { padding: 120px 24px 80px; }
+    nav { padding: 18px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Deep</a>
+  <a href="index.html" class="nav-back">← Back to Deep</a>
+</nav>
+
+<main>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="page-eyebrow">
+      <div class="eyebrow-dot"></div>
+      Founder Concept
+    </div>
+    <h1 class="page-title">Concept by<br><em>Diego Ibarra</em></h1>
+    <div class="page-meta">
+      <span>Diego Ibarra</span>
+      <span class="meta-sep">·</span>
+      <span>2025</span>
+      <span class="meta-sep">·</span>
+      <span>Concept document</span>
+    </div>
+  </div>
+
+  <!-- SECTION 1 -->
+  <div class="memo-section">
+    <div class="section-num">01</div>
+    <h2>Why I built this concept</h2>
+    <p>I've always been fascinated by how the mind works.</p>
+    <p>For years I've explored how psychological patterns influence the way people make decisions, build companies, and navigate uncertainty.</p>
+    <p>A few weeks ago I started building an AI tool designed to identify entrepreneurial archetypes and help founders make better decisions based on how they think.</p>
+    <p>The idea was simple: different founders process risk, conflict, and uncertainty in very different ways — yet almost no tools help them understand those patterns.</p>
+  </div>
+
+  <!-- SECTION 2 -->
+  <div class="memo-section">
+    <div class="section-num">02</div>
+    <h2>Connecting the dots</h2>
+    <p>Around that time, I came across Andrew Wilkinson's post about Deep Personality.</p>
+    <p>So I ran my own profile through the system.</p>
+    <p>The result immediately resonated.</p>
+    <p>Not only because the analysis was surprisingly accurate, but because it confirmed something I had been seeing repeatedly while working with founders: many business problems are not strategy problems — they are self-awareness problems.</p>
+
+    <div class="memo-pullout">
+      <p>That realization changed my direction.</p>
+    </div>
+
+    <p>Instead of continuing with my original project, I began building a system inspired by the core ideas behind Deep Personality — but focused specifically on Spanish-speaking founders and entrepreneurs.</p>
+    <p>You can see the early beta here: <a href="https://sistemaemprendedor.io" class="memo-link" target="_blank">sistemaemprendedor.io</a></p>
+    <p>Over the last few days more than 120 beta users have gone through the system, helping refine the psychological frameworks and insights behind it.</p>
+  </div>
+
+  <!-- SECTION 3 -->
+  <div class="memo-section">
+    <div class="section-num">03</div>
+    <h2>Why I might be the right person to build this</h2>
+    <p><strong style="color: var(--accent); font-weight: 500;">After running my own Deep Personality profile</strong>, something became very clear.</p>
+    <p>My profile shows high openness, strong pattern recognition, and an unusually high interest in understanding how people think and behave. It also highlights a mix of entrepreneurial drive and curiosity about psychological models and frameworks.</p>
+    <p>In other words, I sit at the intersection of two worlds that rarely meet:</p>
+    <ul class="memo-list">
+      <li>building companies</li>
+      <li>studying how the mind works</li>
+    </ul>
+    <p>That combination is precisely what a product like Deep needs.</p>
+    <p>Someone obsessed not only with building businesses, but with understanding the invisible mental patterns behind how they are built.</p>
+  </div>
+
+  <!-- SECTION 4 -->
+  <div class="memo-section">
+    <div class="section-num">04</div>
+    <h2>The next step</h2>
+    <p>After testing the beta with founders, I realized something bigger.</p>
+    <p>Rather than building a parallel product, it made much more sense to imagine what Deep Personality could become if extended into the world of entrepreneurship.</p>
+    <p>So I decided to take the leap and build this concept — a vision of how Deep could evolve into a decision companion for founders and executive teams.</p>
+    <p>And to share that vision directly with Andrew.</p>
+  </div>
+
+  <!-- SECTION 5 -->
+  <div class="memo-section">
+    <div class="section-num">05</div>
+    <h2>The vision for Deep</h2>
+    <p>Deep could evolve into a decision intelligence system for founders.</p>
+    <p>Most tools help leaders understand their companies.<br>Deep helps them understand the mind making the decisions.</p>
+    <p style="color: var(--muted2); font-size: 14px; margin-top: -4px;">The next phase would focus on five capabilities.</p>
+
+    <div class="capability-blocks">
+
+      <div class="capability-block">
+        <div class="capability-title">Founder decision profiles</div>
+        <p>Turn psychological analysis into decision maps for how founders process risk, uncertainty, conflict, and irreversible decisions.</p>
+      </div>
+
+      <div class="capability-block">
+        <div class="capability-title">Decision pattern memory</div>
+        <p>Track decisions over time and surface recurring patterns: bias, hesitation, risk misjudgment, and leadership conflict triggers.</p>
+      </div>
+
+      <div class="capability-block">
+        <div class="capability-title">Leadership dynamics mapping</div>
+        <p>Analyze how founders and executives differ in decision speed, risk tolerance, and conflict response.<br>Reveal structural sources of friction inside leadership teams.</p>
+      </div>
+
+      <div class="capability-block">
+        <div class="capability-title">AI decision companion</div>
+        <p>A system founders can consult during high-stakes moments: hiring, strategy shifts, partnerships, and negotiations.</p>
+      </div>
+
+      <div class="capability-block">
+        <div class="capability-title">Leadership infrastructure</div>
+        <p>Deep becomes a new layer of infrastructure for decision-makers.<br>Software that helps founders understand the psychology shaping their companies.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SECTION 6 -->
+  <div class="memo-section">
+    <div class="section-num">06</div>
+    <h2>What this page is</h2>
+    <p>This page is a concept.</p>
+    <p>But if built well, Deep could become something entirely new:</p>
+    <div class="memo-pullout">
+      <p>Self-awareness infrastructure for decision-makers.</p>
+    </div>
+  </div>
+
+  <!-- CLOSING -->
+  <div class="closing">
+    <div class="closing-text">
+      Most founders spend years trying to improve their companies.<br><br>
+      Very few spend time understanding <em>the mind building the company</em> in the first place.<br><br>
+      Deep could change that.<br><br>
+      And if we get it right, it might fundamentally change how founders <em>think, decide, and build</em>.
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="memo-section" style="border-bottom: none; margin-bottom: 0; padding-bottom: 60px;">
+    <div class="section-num">—</div>
+    <h2>Get in touch</h2>
+    <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+      <div style="font-size: 16px; color: var(--text); font-weight: 400;">Diego</div>
+      <a href="tel:+34628844367" style="font-size: 15px; color: var(--muted); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--muted)'">+34 628 844 367</a>
+      <a href="mailto:ibarra.die@gmail.com" style="font-size: 15px; color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(155,159,255,0.25); padding-bottom: 1px; width: fit-content; transition: border-color 0.2s;" onmouseover="this.style.borderColor='rgba(155,159,255,0.6)'" onmouseout="this.style.borderColor='rgba(155,159,255,0.25)'">ibarra.die@gmail.com</a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="page-footer">
+    <a href="index.html" class="footer-logo">Deep</a>
+    <a href="index.html" class="footer-back">← Back to Deep</a>
+  </div>
+
+</main>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.memo-section, .closing').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
